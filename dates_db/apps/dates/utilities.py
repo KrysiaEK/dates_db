@@ -1,3 +1,13 @@
+import coreapi
+
+
+def connect(month, day):
+    """Connect nubersapi API."""
+
+    client = coreapi.Client()
+    fact = client.get(f'http://numbersapi.com/{month}/{day}/date')
+    return fact
+
 class Months:
     """Months choices."""
 
