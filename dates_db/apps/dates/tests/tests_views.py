@@ -38,7 +38,7 @@ class DateApiTestCase(APITestCase):
             fact="April 4th is the day in 1979 that the 2nd Congress of the Communist Youth of Greece starts."
         )
 
-    @patch('dates_db.apps.dates.views.connect')
+    @patch('dates_db.apps.dates.views.get_fact')
     def test_get_and_create_date(self, mock_response):
         """Ensure date is properly created."""
 
@@ -61,17 +61,19 @@ class DateApiTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_create_not_date(self):
-        """Ensure http 400 is returned when day > 31 or month > 12."""
+        """Ensure http 400 is returned when day and month are invalid."""
 
-        response = self.client.post(
-            path=self.dates_url,
-            data={
-                'month': 16,
-                'day': 6,
-            },
-            format='json',
-        )
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        invalid_dates = [[-1, 1], [0, 1], [13, 1], [1, -1], [1, 0], [1, 32]]
+        for invalid_date in invalid_dates:
+            response = self.client.post(
+                path=self.dates_url,
+                data={
+                    'month': invalid_date[0],
+                    'day': invalid_date[1],
+                },
+                format='json',
+            )
+            self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_create_wrong_date(self):
         """Ensure http 400 is returned when month is shorter than requested."""
@@ -81,6 +83,20 @@ class DateApiTestCase(APITestCase):
             data={
                 'month': 2,
                 'day': 30,
+            },
+            format='json',
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(response.json().get('detail'), "No such date.")
+
+    def test_create_wrong_date_format(self):
+        """Ensure http 400 is returned when month or day value is a string."""
+
+        response = self.client.post(
+            path=self.dates_url,
+            data={
+                'month': "2X",
+                'day': "Y",
             },
             format='json',
         )
