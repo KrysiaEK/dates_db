@@ -2,7 +2,7 @@
 API to check what happened on a certain date.
 
 ## Deployment:
-1.	Create docker-compose.yml file with the following contents in folder destined for this project:
+1.	Create `docker-compose.yml` file with the following contents in folder destined for this project:
 
 ```
 version: "3.9"
@@ -25,7 +25,7 @@ services:
       - db
 ```
 
-2.  Create file docker.env with the following content:
+2.  Create file `docker.env` with the following content:
 ```
 DJANGO_SECRET_KEY=random_value
 POSTGRES_NAME=postgres
@@ -47,3 +47,5 @@ POSTGRES_HOST=db
 The project works on port 8000.
 
 ## Server
+
+The test server runs on `dates.krysia.me`
