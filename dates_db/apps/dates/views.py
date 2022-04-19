@@ -6,7 +6,8 @@ from rest_framework_api_key.permissions import HasAPIKey
 from dates_db.apps.dates.exceptions import NoDateError
 from dates_db.apps.dates.models import Date
 from dates_db.apps.dates.serializers import DateSerializer
-from dates_db.apps.dates.utilities import Months, get_fact, validate_month_and_day
+from dates_db.apps.dates.utilities import (Months, get_fact,
+                                           validate_month_and_day)
 
 
 class DateViewSet(viewsets.mixins.RetrieveModelMixin, viewsets.GenericViewSet, viewsets.mixins.DestroyModelMixin):

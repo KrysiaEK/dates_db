@@ -48,4 +48,4 @@ The project works on port 8000.
 
 ## Server
 
-The test server runs on `dates.krysia.me`
+The test server runs on [dates.krysia.me](http://dates.krysia.me)
