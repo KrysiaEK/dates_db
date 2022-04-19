@@ -1,3 +1,4 @@
+from django.db.models import Count
 from rest_framework import status, viewsets
 from rest_framework.response import Response
 from rest_framework_api_key.permissions import HasAPIKey
@@ -5,7 +6,7 @@ from rest_framework_api_key.permissions import HasAPIKey
 from dates_db.apps.dates.exceptions import NoDateError
 from dates_db.apps.dates.models import Date
 from dates_db.apps.dates.serializers import DateSerializer
-from dates_db.apps.dates.utilities import connect
+from dates_db.apps.dates.utilities import Months, connect
 
 
 class DateViewSet(viewsets.mixins.RetrieveModelMixin, viewsets.GenericViewSet, viewsets.mixins.DestroyModelMixin):
@@ -46,3 +47,20 @@ class DateViewSet(viewsets.mixins.RetrieveModelMixin, viewsets.GenericViewSet, v
             return [HasAPIKey()]
         else:
             return []
+
+
+class PopularityViewSet(viewsets.GenericViewSet):
+    """Views set of ``Date`` model with popularity check."""
+
+    serializer_class = DateSerializer
+    queryset = Date.objects.all()
+
+    def list(self, request, *args, **kwargs):
+        """List of months with the number of their checked days."""
+
+        days_checked = Date.objects.values('month').annotate(days_checked=Count('day'))
+        for element in days_checked:
+            if element['month'] in dict(Months.Choices):
+                element['id'] = element['month']
+                element['month'] = Months.Choices[element['month']-1][1]
+        return Response(days_checked, status=status.HTTP_200_OK)
