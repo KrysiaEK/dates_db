@@ -8,6 +8,7 @@ def connect(month, day):
     fact = client.get(f'http://numbersapi.com/{month}/{day}/date')
     return fact
 
+
 class Months:
     """Months choices."""
 
