@@ -1,5 +1,6 @@
 from rest_framework import status, viewsets
 from rest_framework.response import Response
+from rest_framework_api_key.permissions import HasAPIKey
 
 from dates_db.apps.dates.exceptions import NoDateError
 from dates_db.apps.dates.models import Date
@@ -36,3 +37,12 @@ class DateViewSet(viewsets.mixins.RetrieveModelMixin, viewsets.GenericViewSet, v
         dates = Date.objects.all()
         serializer = self.get_serializer(dates, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def get_permissions(self):
+        """Set Api Key permission on method delete."""
+
+        method = self.request.method
+        if method == 'DELETE':
+            return [HasAPIKey()]
+        else:
+            return []
