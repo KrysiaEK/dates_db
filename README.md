@@ -33,10 +33,15 @@ POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres
 POSTGRES_HOST=db
 ```
-4. Run ```docker-compose pull```
-5. Run test command to make sure everything is in order:
+4. Run:
+```docker-compose pull```
+5. Run migrations: 
+```docker-compose run web python manage.py migrate```
+6. Run test command to make sure everything is in order:
 ```docker-compose run web python manage.py test dates_db```
-6. Start the server:
+7. Generate API key: 
+```docker-compose run web python manage.py generate_api_key```
+8. Start the server:
  ```docker-compose up```
 
 The project works on port 8000.
