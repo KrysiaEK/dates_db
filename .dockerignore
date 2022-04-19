@@ -1,0 +1,10 @@
+*
+
+!dates_db/apps/*
+!dates_db/config/*
+dates_db/config/.env
+!dates_db/init.py
+!manage.py
+!Pipfile
+!Pipfile.lock
+!.devops/docker/start.sh
