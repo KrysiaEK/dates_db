@@ -1,6 +1,15 @@
 # Dates Database
 API to check what happened on a certain date.
 
+## Local development:
+1. Clone repository
+2. Run ```docker-compose build```
+3. Run migrations: 
+```docker-compose run web python manage.py migrate```
+4. Run test command to make sure everything is in order:
+```docker-compose run web python manage.py test dates_db```
+5. Start the development server with command: ```docker-compose up```
+
 ## Deployment:
 1.	Create `docker-compose.yml` file with the following contents in folder destined for this project:
 
