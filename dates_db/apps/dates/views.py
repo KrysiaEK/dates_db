@@ -29,3 +29,10 @@ class DateViewSet(viewsets.mixins.RetrieveModelMixin, viewsets.GenericViewSet, v
         date = serializer.save()
         serializer = DateSerializer(date)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def list(self, request, *args, **kwargs):
+        """List all dates in database."""
+
+        dates = Date.objects.all()
+        serializer = self.get_serializer(dates, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
