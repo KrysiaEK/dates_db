@@ -10,3 +10,7 @@ class Date(models.Model):
     month = models.PositiveSmallIntegerField(choices=Months.Choices)
     day = models.PositiveSmallIntegerField(validators=[MinValueValidator(1), MaxValueValidator(31)])
     fact = models.TextField()
+
+    class Meta:
+        verbose_name = 'Date'
+        verbose_name_plural = 'Dates'
