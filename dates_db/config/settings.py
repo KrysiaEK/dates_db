@@ -28,10 +28,9 @@ SECRET_KEY = env('DJANGO_SECRET_KEY')
 API_KEY_CUSTOM_HEADER = 'HTTP_X_API_KEY'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DEBUG', default=False)
 
-ALLOWED_HOSTS = ["*"]
-
+ALLOWED_HOSTS = env('ALLOWED_HOSTS', default='').split()
 
 # Application definition
 
@@ -147,3 +146,5 @@ REST_FRAMEWORK = {
 
 TEST_RUNNER = 'xmlrunner.extra.djangotestrunner.XMLTestRunner'
 TEST_OUTPUT_FILE_NAME = env('TEST_OUTPUT_FILE_NAME', default=None)
+
+APPEND_SLASH = False

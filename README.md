@@ -36,6 +36,8 @@ services:
 
 2.  Create file `docker.env` with the following content:
 ```
+DEBUG=False
+ALLOWED_HOSTS=host1 host2
 DJANGO_SECRET_KEY=random_value
 POSTGRES_NAME=postgres
 POSTGRES_USER=postgres
