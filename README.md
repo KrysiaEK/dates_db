@@ -1,6 +1,23 @@
 # Dates Database
 API to check what happened on a certain date.
 
+## Tools explanation:
+- Django, Django REST Framework - I have the most experience in using these frameworks. 
+- PostgreSQL - I have the most experience in using this database.
+- django-environ - I think that project configuration should be done through environment variables.
+- Core API - I had to connect to an external api and this is .
+- Django REST Framework API key - I had to use API key.
+- Factory Boy - it is easier and faster than fixtures.
+- Linters - code quality and security is important to me.
+    + Flake8
+    + Isort
+    + Vulture
+    + Django Migration Linter
+    + Dotenv Linter
+    + Safety
+    + We Make Python Styleguide
+- Unittest XML Reporting - to save test results in a file. 
+
 ## Local development:
 1. Clone repository
 2. Run ```docker-compose build```
