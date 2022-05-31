@@ -1,6 +1,7 @@
 import coreapi
+from coreapi.exceptions import CoreAPIException
 
-from dates_db.apps.dates.exceptions import NoDateError
+from dates_db.apps.dates.exceptions import NoDateError, InvalidFactError
 
 
 def validate_month_and_day(month, day):
@@ -18,7 +19,12 @@ def get_fact(month, day):
     """Get fact from nubersapi API."""
 
     client = coreapi.Client()
-    fact = client.get(f'http://numbersapi.com/{month}/{day}/date')
+    try:
+        fact = client.get(f'http://numbersapi.com/{month}/{day}/date')
+    except CoreAPIException:
+        raise InvalidFactError()
+    if not isinstance(fact, str):
+        raise InvalidFactError()
     return fact
 
 

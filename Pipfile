@@ -8,7 +8,6 @@ django = "~=3.2"
 djangorestframework = "~=3.13"
 psycopg2-binary = "~=2.9"
 django-environ = "~=0.8"
-django-cors-headers = "~=3.11"
 coreapi = "~=2.3.3"
 djangorestframework-api-key = "~=2.2"
 
